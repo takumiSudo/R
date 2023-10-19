@@ -2,14 +2,39 @@
 
 For a political communication & data analysis class, there is going to be an assesment for the R part, this repo is going to contain the basics of R.
 
-| Function                                | Explanation                      | Type               |
-|-----------------------------------------|----------------------------------|--------------------|
-|`read_csv(url)`|Import the csv and read the data|Basics|
-|`Filter(data, column == "specific_y")`|Filter the data with specific rows| Basics|
-|`Select(data, column1, column2, column3)`| Select the target Columns|Basics|
-|`Select(data, new_name = `old_column`)`| While selecting, the columns is renamed|Basics|
-|`select(data, -column)`|Putting a minus is means to delete the data| Basics|
-|
+| Function                                | Explanation                      | 
+|-----------------------------------------|----------------------------------|
+|`read_csv(url)`|Import the csv and read the data|
+|`Filter(data, column == "specific_y")`|Filter the data with specific rows| 
+|`Select(data, column1, column2, column3)`| Select the target Columns|
+|`Select(data, new_name = old_column)`| While selecting, the columns is renamed|
+|`select(data, -column)`|Putting a minus is means to delete the data| 
+|`Arrange(data, column, -column)`| Sort Columns(- makes it descending)| 
+|`Mutate(newColumn = abs(col1 - col2))`| Adding or Transform Variable | 
+|`n()` | Count the number of rows in a group when working grouped data|
+|-----------------------------------------|----------------------------------|
+|`groupby(Question)`| groupby a specifc column (does nothing itself) |
+|`grouby(quetions) |> Summarize(support = mean(support))`| Makes a new column, but groupby a certain row|
+|-----------------------------------------|----------------------------------|
+| `geom_points`                           | Scatter plot                     |
+| `geom_smooth`                           | Loess curve                      |
+| `geom_smooth(method = "lm")`            | Linear regression line           |
+| `geom_points(aes(x, y, size = Population))` | Size of points according to Population |
+| `geom_points(aes(x, y, size = white_pct))`  | Color of points depending on "white_pct" column |
+|-----------------------------------------|----------------------------------|
+| `geom_bar(aes(x = growth))`             | Bar Plot mapped for x            |
+| `geom_col(aes(x = canidate, y = votes))`| Directly Feed the Y, so geom_col can plot the fed plot|
+| `geom_line(aes(x, y))`                  | geom_line creates a line plot|
+| `geom_polygon`| Maps and shapes |
+|----------|---------------------------|
+| `Inner_join`| Join the datsets       |
+|`Inner_join(c = "")`| Join the datasets on a specific column|
+| `left_join` | keeps the rows from the left dataset and make it NA.values|
+|`pivot_longer`| Transform Data from Columns to Rows|
+|`pivot_wider`| Transform Dat from Rows to Columns |
+
+
+
 
 
 
