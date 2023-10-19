@@ -14,13 +14,14 @@ For a political communication & data analysis class, there is going to be an ass
 |`n()` | Count the number of rows in a group when working grouped data|
 |-----------------------------------------|----------------------------------|
 |`groupby(Question)`| groupby a specifc column (does nothing itself) |
-|`grouby(quetions) |> Summarize(support = mean(support))`| Makes a new column, but groupby a certain row|
+|`grouby(quetions) %>% Summarize(support = mean(support))`| Makes a new column, but groupby a certain row|
 |-----------------------------------------|----------------------------------|
 | `geom_points`                           | Scatter plot                     |
 | `geom_smooth`                           | Loess curve                      |
 | `geom_smooth(method = "lm")`            | Linear regression line           |
 | `geom_points(aes(x, y, size = Population))` | Size of points according to Population |
 | `geom_points(aes(x, y, size = white_pct))`  | Color of points depending on "white_pct" column |
+| `ggplot(data = facts_state) +  geom_point(mapping = aes(x = college, y = income)) `| simple plot |
 |-----------------------------------------|----------------------------------|
 | `geom_bar(aes(x = growth))`             | Bar Plot mapped for x            |
 | `geom_col(aes(x = canidate, y = votes))`| Directly Feed the Y, so geom_col can plot the fed plot|
@@ -28,8 +29,8 @@ For a political communication & data analysis class, there is going to be an ass
 | `geom_polygon`| Maps and shapes |
 |----------|---------------------------|
 | `Inner_join`| Join the datsets       |
-|`Inner_join(c = "")`| Join the datasets on a specific column|
-| `left_join` | keeps the rows from the left dataset and make it NA.values|
+|`Inner_join(c = "col")`| Join the datasets on a specific column|
+| `left_join(left_data, right_data)` | keeps the rows from the left dataset and make it NA.values|
 |`pivot_longer`| Transform Data from Columns to Rows|
 |`pivot_wider`| Transform Dat from Rows to Columns |
 
