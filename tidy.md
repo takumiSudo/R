@@ -1,12 +1,6 @@
 ---
 title: "TidyVerse"
-bibliography: https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5-transformation.md
-link-citations: TRUE
 author : sud0
-output:
-  html_document:
-    pandoc_args: "--toc --mathjax"
-    pandoc: "/usr/local/bin/pandoc" # macOS example
 ---
 
 

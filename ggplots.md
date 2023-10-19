@@ -9,8 +9,8 @@ a data set, a coordinate system, and geoms—visual marks that represent data po
 
 
 
-### Basic Structure of GGplots
-```
+# Basic Structure of GGplots
+```r
 ggplot(data = <Data>) +
   <Geom_Function>(mapping = aes(<Mappings>),
   stat = <Stat>,
@@ -20,6 +20,45 @@ ggplot(data = <Data>) +
   <Scale_Function> +
   <Theme_Function>
 ```
+
+## Scatter Plots.
+
+```r
+ggplot(data = facts_state,        # which data set?
+       aes(x=college, y=income))  # which variables as aesthetics?
+       + geom_point()
+```
+
+The geompoints create a **scatter Plot**
+The same plots can be plotted in within the geompoints such as the following : 
+
+```r
+# same plot as above
+ggplot(data = facts_state) + 
+  geom_point(mapping = aes(x = college, y = income)) 
+```
+
+
+| Function                                | Explanation                      |
+|-----------------------------------------|----------------------------------|
+| `geom_points`                           | Scatter plot                     |
+| `geom_smooth`                           | Loess curve                      |
+| `geom_smooth(method = "lm")`            | Linear regression line           |
+| `geom_points(aes(x, y, size = Population))` | Size of points according to Population |
+| `geom_points(aes(x, y, size = white_pct))`  | Color of points depending on "white_pct" column |
+
+## Barplots & Line Plots
+
+
+| Function                                | Explanation                      |
+|-----------------------------------------|----------------------------------|
+| `geom_bar(aes(x = growth))`             | Bar Plot mapped for x            |
+| `geom_col(aes(x = canidate, y = votes))`| Directly Feed the Y, so geom_col can plot the fed plot|
+| `geom_line(aes(x, y))`                  | geom_line creates a line plot|
+
+
+
+*geom_polygon -> plots the maps or any other shapes*
 
 
 *aes()*
@@ -38,4 +77,3 @@ would plot all the points blue no matter the value of the points. On the other h
 were `aes(color = variables)`, then the aes() will automatically assign colors based on the unique values.
 
 
-### Plotting

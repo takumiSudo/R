@@ -1,0 +1,120 @@
+
+
+```{r}
+library(tidyverse)
+url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"
+d <- read_csv(url) %>% 
+  select(-URL) %>% 
+  rename(Rep = `Republican Support`, Dem = `Democratic Support`)
+d
+
+
+d2 <- d %>% 
+  group_by(Question) %>%
+  mutate(avg_support = mean(Support), 
+         diff = Support - avg_support)
+d2
+
+d3 <- d |> mutate(avg_support = mean(Support), diff = Support - avg_support) 
+d3
+```
+
+
+```{r}
+library(tidyverse)
+url <- "https://raw.githubusercontent.com/houstondatavis/data-jam-august-2016/master/csv/county_facts.csv"
+facts <- read_csv(url) 
+facts_subset <- facts %>% 
+  select(fips, area_name, state_abbreviation, 
+         population = Pop_2014_count, 
+         pop_change = Pop_change_pct,
+         over65 = Age_over_65_pct, 
+         female = Sex_female_pct,
+         white = Race_white_pct,
+         college = Pop_college_grad_pct, 
+         income = Income_per_capita)
+facts_state <- facts_subset %>% 
+  filter(is.na(state_abbreviation) & fips != 0) %>% 
+  select(-state_abbreviation)
+facts_state
+
+ggplot(data = facts_state,
+       mapping = aes(x = college, y = income)) + 
+  geom_point()   # adding the geometrical representation
+```
+
+
+```{r}
+# Loess curve
+ggplot(data = facts_state, 
+       mapping = aes(x = college, y = income)) + 
+  geom_point() +
+  geom_smooth() 
+
+# Linear regression line
+ggplot(data = facts_state, 
+       mapping = aes(x = college, y = income)) + 
+  geom_point() +
+  geom_smooth(method = "lm")
+
+```
+
+
+```{r}
+url_state <- "https://raw.githubusercontent.com/houstondatavis/data-jam-august-2016/master/csv/primary_results.csv"
+
+results_state <- read_csv(url_state) %>% 
+  group_by(state, party, candidate) %>% 
+  summarize(votes=sum(votes))
+
+nh_gop <- results_state %>% 
+  filter(state == "New Hampshire" & party == "Republican")
+nh_gop
+
+ggplot(nh_gop) + 
+  geom_col(aes(x=candidate, y=votes))
+```
+
+
+```{r}
+# dataset 1: dates for each primary
+url2 <- "https://raw.githubusercontent.com/houstondatavis/data-jam-august-2016/master/csv/primary_schedule.csv"
+schedule  <- read_csv(url2)
+schedule <- schedule %>% 
+  mutate(date = as.Date(date, format="%m/%d/%y"))
+schedule
+
+# dataset 2: vote share for trump for each state
+trump = results_state %>% 
+  group_by(state, party) %>% 
+  mutate(vote_prop=votes/sum(votes)) %>% 
+  filter(candidate=="Donald Trump")
+trump
+
+# join the two data sets
+trump <- left_join(trump, schedule) %>% 
+  group_by(date) %>% 
+  summarize(vote_prop = mean(vote_prop))
+trump
+
+
+ggplot(trump) + geom_line(aes(x = date, y = vote_prop))
+```
+
+```{r}
+library(tidyverse)
+base = "https://raw.githubusercontent.com/ccs-amsterdam/r-course-material/master/data"
+income_raw = read_csv(paste(base, "income_topdecile.csv", sep = "/")) %>% na.omit
+income_raw
+
+
+# as always, you can use either %>% notation or specify the data as first argument. so, the below two commands are equivalent
+
+# using pipe (%>%) notation
+income <- income_raw %>% pivot_longer(U.S.:Europe, names_to = 'country', values_to = 'income_topdecile')
+income
+
+
+income_wider <- income %>% pivot_wider(Year:income_topdecile, names_to='income_topdecile' , values_to='country')
+```
+

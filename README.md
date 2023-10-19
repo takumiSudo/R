@@ -2,9 +2,20 @@
 
 For a political communication & data analysis class, there is going to be an assesment for the R part, this repo is going to contain the basics of R.
 
+| Function                                | Explanation                      | Type               |
+|-----------------------------------------|----------------------------------|--------------------|
+|`read_csv(url)`|Import the csv and read the data|Basics|
+|`Filter(data, column == "specific_y")`|Filter the data with specific rows| Basics|
+|`Select(data, column1, column2, column3)`| Select the target Columns|Basics|
+|`Select(data, new_name = `old_column`)`| While selecting, the columns is renamed|Basics|
+|`select(data, -column)`|Putting a minus is means to delete the data| Basics|
+|
 
 
-### R TidyVerse
+
+
+
+## R Basics _ Tidyverse
 
 Data Transformation, otherwise known as data preprocessing can be done with the [R Tidyverse](./tidy.rmd).
 
@@ -16,13 +27,59 @@ read_csv(url) |>
   arrange(-party_diff)
 ```
 
+## Summarization 
+Dataset Summarization -> GroupBy, Summarization, this is found -> [Summarization](./summarize.md)
 
-### GGplots
+```r
+d %>% 
+  group_by(Question) %>%                    # group by "Questions"
+  summarize(Support = mean(Support)) %>%    # average "Support" per group
+  arrange(-Support)  
+```
 
-For most of the visualization we can use the [ggplots](./ggplots.rmd) library
+## GGplots
+
+For most of the visualization we can use the [ggplots](./ggplots.md) library
 
 
-### Basic R Chunk
+## Joining _data 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Basic R Chunk
 Embed Code With knitr
 Code Chunks
 Surround code chunks with ```{r} and ``` or use the Insert Code Chunk button. Add a chunk label and/or chunk options inside the curly braces after r.
